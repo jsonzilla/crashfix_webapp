@@ -10,3 +10,6 @@ composer.phar
 # composer.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/composer
+
+### ignore config files ###
+/protected/config/user_params.ini
