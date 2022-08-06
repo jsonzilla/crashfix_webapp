@@ -65,6 +65,6 @@ should be used to avoid sending headers befor session is created.
 To avoid Code Coverage low memory PHP error, increase memory limit
 in php.ini from 128M to 256M and restart Apache.
 
-Troubleshooting:
+## Troubleshooting:
 * Error ```CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #9 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'crashfix.b.status' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by```
   * Run in database ```SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',));```
