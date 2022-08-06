@@ -1,13 +1,15 @@
 # Crashfix WebApp
 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ccde55326c7afd78fb10/test_coverage)](https://codeclimate.com/github/jsonzilla/crashfix_webapp/test_coverage)
+
 ### Installing Apache HTTP Server and PHP 5 (Debian/Ubuntu)
 
 From a command shell, you will run the following commands:
 ```bash
 sudo apt-get install apache2
-sudo apt-get install php5
-sudo apt-get install libapache2-mod-php5 php5-gd
-sudo apt-get install php5-sqlite
+sudo apt-get install php
+sudo apt-get install libapache2-mod-php php-gd
+sudo apt-get install php-sqlite3
 sudo service apache2 restart
 ```
 
@@ -22,7 +24,7 @@ sudo apt-get install sendmail
 
 ### Installing Pear:
 ```bash
-sudo apt-get install php-pear`
+sudo apt-get install php-pear
 ```
 
 ### Installing PHPUnit:
@@ -30,22 +32,30 @@ sudo apt-get install php-pear`
 sudo apt-get install phpunit
 ```
 
+### Installing Composer:
+```bash
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+# optional php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
+
 ### Installing Selenium extension:
 ```bash
-sudo pear channel-update pear.phpunit.de
-sudo apt-get install php5-curl
-sudo pear install phpunit/PHPUnit_Selenium-1.2.5
+sudo apt-get install php-curl
+php composer.phar require --dev phpunit/phpunit
+php composer.phar require --dev phpunit/phpunit-selenium=1.2.9
 ```
 
 ### Installing Phing:
 ```bash
-sudo pear channel-discover pear.phing.info
-sudo pear install phing/phing
+php composer.phar require --dev phing/phing
 ```
 
 ## Running Unit Tests
 Goto protected/tests directory and type in command line:
 ```
+cd protected/tests
 phpunit --stderr unit
 ```
 
