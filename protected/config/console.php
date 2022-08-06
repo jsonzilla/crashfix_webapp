@@ -7,28 +7,24 @@ require_once('common.php');
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'CrashFix',
-	
+
 	// preloading 'log' component
 	'preload'=>array('log'),
-	
+
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
 	),
-	
+
 	// application components
 	'components'=>array(
-		
-		'db'=>dbParams(),		
+
+		'db'=>dbParams(),
 		'dbTest'=>dbParams('test_'),
-				
-		'daemon'=>array(
-			'class'=>'Daemon',
-			'host'=>'127.0.0.1',
-			'servicePort'=>'50',
-		),		
-		
+
+		'daemon'=> daemonParams(),
+
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -39,8 +35,8 @@ return array(
 						'maxFileSize'=>5*1024,
 						'maxLogFiles'=>10,
 					),
-			),				
-		),		
+			),
+		),
 	),
     'params'=>getCommonParams(),
 );
