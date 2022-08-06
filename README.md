@@ -3,6 +3,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ccde55326c7afd78fb10/maintainability)](https://codeclimate.com/github/jsonzilla/crashfix_webapp/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ccde55326c7afd78fb10/test_coverage)](https://codeclimate.com/github/jsonzilla/crashfix_webapp/test_coverage)
 
+This is a service that runs the Crashfix server and provides a webapp tha interacts with the [Crashfix Daemon](https://github.com/jsonzilla/crashfix_webapp).
+
 ### Installing Apache HTTP Server and PHP 5 (Debian/Ubuntu)
 
 From a command shell, you will run the following commands:
