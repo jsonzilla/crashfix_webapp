@@ -1,0 +1,7 @@
+{
+    "require-dev": {
+        "phpunit/phpunit-selenium": "1.2.9",
+        "phing/phing": "^2.17",
+        "phpunit/phpunit": "^9.5"
+    }
+}
