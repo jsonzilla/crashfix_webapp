@@ -1,4 +1,3 @@
-
 <?php
 
 class m180628_193546_fix_timestamp extends CDbMigration
@@ -15,5 +14,5 @@ class m180628_193546_fix_timestamp extends CDbMigration
             $this->alterColumn('{{module}}', 'timestamp', 'INTEGER');
             $this->alterColumn('{{bug_change}}', 'timestamp', 'INTEGER NOT NULL');
             $this->alterColumn('{{operation}}', 'timestamp', 'INTEGER NOT NULL');
-        }
+        }       
 }

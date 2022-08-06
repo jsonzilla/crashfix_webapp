@@ -60,6 +60,7 @@ class CMssqlCommandBuilder extends CDbCommandBuilder
 	 */
 	public function createUpdateCommand($table,$data,$criteria)
 	{
+		$this->ensureTable($table);
 		$criteria=$this->checkCriteria($table,$criteria);
 		$fields=array();
 		$values=array();
@@ -131,6 +132,20 @@ class CMssqlCommandBuilder extends CDbCommandBuilder
 	{
 		$criteria=$this->checkCriteria($table, $criteria);
 		return parent::createUpdateCounterCommand($table, $counters, $criteria);
+	}
+
+	/**
+	 * Alters the SQL to apply JOIN clause.
+	 * Overrides parent implementation to comply with the DELETE command syntax required when multiple tables are referenced.
+	 * @param string $sql the SQL statement to be altered
+	 * @param string $join the JOIN clause (starting with join type, such as INNER JOIN)
+	 * @return string the altered SQL statement
+	 */
+	public function applyJoin($sql,$join)
+	{
+		if(trim($join)!=='')
+			$sql=preg_replace('/^\s*DELETE\s+FROM\s+((\[.+\])|([^\s]+))\s*/i',"DELETE \\1 FROM \\1",$sql);
+		return parent::applyJoin($sql,$join);
 	}
 
 	/**

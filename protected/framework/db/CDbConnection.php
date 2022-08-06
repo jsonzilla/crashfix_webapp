@@ -576,10 +576,42 @@ class CDbConnection extends CApplicationComponent
 			return $str;
 
 		$this->setActive(true);
-		if(($value=$this->_pdo->quote($str))!==false)
-			return $value;
-		else  // the driver doesn't support quote (e.g. oci)
-			return "'" . addcslashes(str_replace("'", "''", $str), "\000\n\r\\\032") . "'";
+		return $this->quoteValueInternal($str, PDO::PARAM_STR);
+	}
+
+	/**
+	 * Quotes a value for use in a query using a given type.
+	 * @param mixed $value the value to be quoted.
+	 * @param integer $type The type to be used for quoting.
+	 * This should be one of the `PDO::PARAM_*` constants described in
+	 * {@link http://www.php.net/manual/en/pdo.constants.php PDO documentation}.
+	 * This parameter will be passed to the `PDO::quote()` function.
+	 * @return string the properly quoted string.
+	 * @see http://www.php.net/manual/en/function.PDO-quote.php
+	 * @since 1.1.18
+	 */
+	public function quoteValueWithType($value, $type)
+	{
+		$this->setActive(true);
+		return $this->quoteValueInternal($value, $type);
+	}
+
+	/**
+	 * Quotes a value for use in a query using a given type. This method is internally used.
+	 * @param mixed $value
+	 * @param int $type
+	 * @return string
+	 */
+	private function quoteValueInternal($value, $type)
+	{
+		if(mb_stripos($this->connectionString, 'odbc:')===false)
+		{
+			if(($quoted=$this->_pdo->quote($value, $type))!==false)
+				return $quoted;
+		}
+
+		// fallback for drivers that don't support quote (e.g. oci and odbc)
+		return "'" . addcslashes(str_replace("'", "''", $value), "\000\n\r\\\032") . "'";
 	}
 
 	/**

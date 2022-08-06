@@ -153,6 +153,7 @@ class CFileHelper
 	 * @param array $options additional options. The following options are supported:
 	 * newDirMode - the permission to be set for newly copied directories (defaults to 0777);
 	 * newFileMode - the permission to be set for newly copied files (defaults to the current environment setting).
+	 * @throws Exception
 	 */
 	protected static function copyDirectoryRecursive($src,$dst,$base,$fileTypes,$exclude,$level,$options)
 	{
@@ -199,6 +200,7 @@ class CFileHelper
 	 * level N means searching for those directories that are within N levels.
 	 * @param boolean $absolutePaths whether to return absolute paths or relative ones
 	 * @return array files found under the directory.
+	 * @throws Exception
 	 */
 	protected static function findFilesRecursive($dir,$base,$fileTypes,$exclude,$level,$absolutePaths)
 	{
@@ -218,7 +220,7 @@ class CFileHelper
 				if($isFile)
 					$list[]=$absolutePaths?$fullPath:$path;
 				elseif($level)
-					$list=array_merge($list,self::findFilesRecursive($dir,$base.'/'.$file,$fileTypes,$exclude,$level-1,$absolutePaths));
+					$list=array_merge($list,self::findFilesRecursive($dir,$base.DIRECTORY_SEPARATOR.$file,$fileTypes,$exclude,$level-1,$absolutePaths));
 			}
 		}
 		closedir($handle);
