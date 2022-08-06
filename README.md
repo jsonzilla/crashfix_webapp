@@ -1,9 +1,6 @@
 # Crashfix WebApp
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/ccde55326c7afd78fb10/maintainability)](https://codeclimate.com/github/jsonzilla/crashfix_webapp/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ccde55326c7afd78fb10/test_coverage)](https://codeclimate.com/github/jsonzilla/crashfix_webapp/test_coverage)
-
-This is a service that runs the Crashfix server and provides a webapp tha interacts with the [Crashfix Daemon](https://github.com/jsonzilla/crashfix_webapp).
+This is a service that runs the Crashfix server and provides a webapp tha interacts with the [Crashfix Daemon](https://github.com/jsonzilla/crashfix_service).
 
 ### Installing Apache HTTP Server and PHP 5 (Debian/Ubuntu)
 
@@ -67,3 +64,7 @@ should be used to avoid sending headers befor session is created.
 
 To avoid Code Coverage low memory PHP error, increase memory limit
 in php.ini from 128M to 256M and restart Apache.
+
+Troubleshooting:
+* Error ```CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #9 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'crashfix.b.status' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by```
+  * Run in database ```SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',));```
