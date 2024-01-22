@@ -68,3 +68,7 @@ in php.ini from 128M to 256M and restart Apache.
 ## Troubleshooting:
 * Error ```CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #9 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'crashfix.b.status' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by```
   * Run in database ```SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',));```
+  * Making GROUP_BY setting permanent: Above setting will not survive a MySQL restart or a system reboot. Need to edit MySQL /etc/mysql/my.cnf adding this line to the end...
+```sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION```
+then restart MySQL...
+```$ sudo systemctl start mysql.service```
