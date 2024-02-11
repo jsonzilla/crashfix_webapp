@@ -51,7 +51,7 @@ class MailQueue extends CActiveRecord
 		return array(
 			array('create_time, status, recipient', 'required'),
 			array('create_time, status, sent_time', 'numerical', 'integerOnly'=>true),
-			array('recipient', 'length', 'max'=>32),
+			array('recipient', 'length', 'max'=>128),
 			array('email_subject', 'length', 'max'=>256),
 			array('email_headers', 'length', 'max'=>1024),
 			array('email_body', 'length', 'max'=>2048),
