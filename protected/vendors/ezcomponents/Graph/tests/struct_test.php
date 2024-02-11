@@ -2,6 +2,9 @@
 /**
  * ezcGraphStructTest 
  * 
+ * daveb update 20240212: apply just __set_state fixes from commit...
+ *     https://github.com/zetacomponents/Graph/commit/a9e534018300be4b42f0c766ea7aea7ec0a084c8
+ *
  * @package Graph
  * @version 1.5
  * @subpackage Tests
@@ -101,9 +104,7 @@ class ezcGraphStructTest extends ezcTestCase
 
     public function testContextSetState()
     {
-        $context = new ezcGraphContext();
-
-        $context->__set_state(
+        $context = ezcGraphContext::__set_state(
         array(
             'dataset' => 'set',
             'datapoint' => 'point',
@@ -124,9 +125,7 @@ class ezcGraphStructTest extends ezcTestCase
 
     public function testContextSetStateWithURL()
     {
-        $context = new ezcGraphContext();
-
-        $context->__set_state(
+        $context = ezcGraphContext::__set_state(
         array(
             'dataset' => 'set',
             'datapoint' => 'point',
@@ -218,9 +217,7 @@ class ezcGraphStructTest extends ezcTestCase
 
     public function testCoordinateSetState()
     {
-        $context = new ezcGraphCoordinate( 0, 0 );
-
-        $context->__set_state(
+        $context = ezcGraphCoordinate::__set_state(
         array(
             'x' => 23,
             'y' => 42,
@@ -252,9 +249,7 @@ class ezcGraphStructTest extends ezcTestCase
 
     public function testStepSetState()
     {
-        $step = new ezcGraphAxisStep();
-
-        $step->__set_state(
+        $step = ezcGraphAxisStep::__set_state(
         array(
             'position' => .4,
             'width' => .2,
