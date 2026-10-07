@@ -237,6 +237,7 @@ class SiteController extends Controller
 					throw new CHttpException(403, "Couldn't update user info.");				
 				
 				// Add an E-mail with password reset link to mail queue
+				$emailFrom = "no-reply@".Yii::app()->request->serverName;
 				$emailSubject = "[CrashFix] Account Password Recovery";
 				$emailText = "This message has been sent to you, because someone requested\r\n";
 				$emailText .= "to recover lost password of your CrashFix account.\r\n\r\n";
@@ -245,7 +246,8 @@ class SiteController extends Controller
 				$emailText .= "If you did request to recover your lost password, then please follow\r\n";
 				$emailText .= "this link to login into your CrashFix account and reenter your password:\r\n";
 				$emailText .= $this->createAbsoluteUrl('site/login', array('prt'=>$pwdResetToken));
-				$emailText .= "\r\n";
+				$emailText .= "\r\n";				
+				$headers="From: {$emailFrom}\r\nReply-To: {$emailFrom}";				
 				if(MailQueue::addMail($model->email, $emailSubject, $emailText))
 				{
 					Yii::app()->user->setFlash('recoverPassword', 'An E-mail with password recovery information will be sent to your E-mail address shortly. Please visit your mailbox.');
